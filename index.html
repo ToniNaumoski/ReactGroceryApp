@@ -3,10 +3,11 @@
 <html>
 
 <body>
-    <script src="https://unpkg.com/react@16.3.2/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@16.3.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" charset="utf-8"></script>
-    <script type="text/babel">
+
+  <script src="https://unpkg.com/react@16.3.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.3.2/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" charset="utf-8"></script>
+  <script type="text/babel">
 
 const Product = props => {
   const plus = () => {
@@ -46,7 +47,7 @@ class GroceryApp extends React.Component {
   render() {
     return (
       <ul>
-        {this.props.products.map((product, i) => {
+        {this.state.products.map((product, i) => {
           return <Product key={i} i={i} product={product} onVote={this.onVote.bind(this)} />
         })}
       </ul>
@@ -62,7 +63,8 @@ ReactDOM.render(<GroceryApp
   ]}
 />, document.getElementById('root'))
     </script>
-    <div id="root"></div>
+  <div id="root"></div>
+
 </body>
 
 </html>
