@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+</script>
+<html>
+
+<body>
+    <script src="https://unpkg.com/react@16.3.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.3.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" charset="utf-8"></script>
+    <script type="text/babel">
+
+const Product = props => {
+  const plus = () => {
+    props.onVote(props.product.votes += 1, props.i)
+    // Call props.onVote to increase the vote count for this product
+  };
+  const minus = () => {
+    props.onVote(props.product.votes -= 1, props.i)
+    // Call props.onVote to decrease the vote count for this product
+  };
+  return (
+    <li>
+      <span>{props.product.name}</span> - <span>votes: {props.product.votes}</span>
+      <button onClick={plus}>+</button>{" "}
+      <button onClick={minus}>-</button>
+    </li>
+  );
+};
+
+class GroceryApp extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      products: [...this.props.products]
+    }
+  }
+
+  onVote = (dir, index) => {
+    // Update the products array accordingly ...
+    let product = [...this.state.products];
+    product[index].votes = dir;
+    this.setState({
+      products: product,
+    })
+  };
+
+  render() {
+    return (
+      <ul>
+        {this.props.products.map((product, i) => {
+          return <Product key={i} i={i} product={product} onVote={this.onVote.bind(this)} />
+        })}
+      </ul>
+    );
+  }
+}
+
+ReactDOM.render(<GroceryApp
+  products={[
+    { name: "Oranges", votes: 0 },
+    { name: "Apples", votes: 0 },
+    { name: "Bananas", votes: 0 }
+  ]}
+/>, document.getElementById('root'))
+    </script>
+    <div id="root"></div>
+</body>
+
+</html>
